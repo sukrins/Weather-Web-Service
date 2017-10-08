@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>
+REST service implementation by Sukrins Shrestha
+</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function($) {
+  $.ajax({
+  url : "http://api.wunderground.com/api/1d3f89ada9e69e73/geolookup/conditions/q/IL/Chicago.json",
+  dataType : "jsonp",
+  success : function(parsed_json) {
+  var city = parsed_json['location']['city'];
+  var state = parsed_json['location']['state']; 
+  var temp_f = parsed_json['current_observation']['temp_f'];
+  var temp_c = parsed_json['current_observation']['temp_c'];  
+  var icon_url = parsed_json['current_observation']['icon_url'];  
+  var weather = document.getElementById('wuDiv');
+  weather.innerHTML = "<div><h2>WeatherUnderground REST service by Sukrins Shrestha : " + city + " </h2>" + "Current temperature in " + city + ", " + state + " is: " + temp_f + " F / " + temp_c + " C" + " <img src=" +icon_url+ " /></div>";
+  }
+  });
+});
+</script>
+
+<link href="main.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+<div class="main-title"><h1>SOA with REST by Sukrins Shrestha</h1></div>
+<div id="wuDiv"></div>
+</body>
+</html>
